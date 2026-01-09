@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import CaseStudyCards from '../../../components/allServicesComponents/CaseStudyCards';
 import DotGrid from '../../../components/allServicesComponents/DotGrid';
 import useDeviceType from '../../../components/hooks/useDeviceType';
-import Link from 'next/link';
 
 // const caseStudies = [
 //     {
@@ -38,16 +38,21 @@ const MarkdownRenderer = ({ children }) => (
                 </h2>
             ),
             p: ({ children }) => (
-                <p className="text-[#9c9c9c] text-lg leading-relaxed py-3">{children}</p>
+                <p className="text-[#9c9c9c] block text-lg leading-relaxed py-2">{children}</p>
             ),
             ul: ({ children }) => (
                 <ul className="list-disc ml-8 space-y-4 text-[#9c9c9c] font-[500] py-2 text-lg xl:text-xl ">
                     {children}
                 </ul>
             ),
+            ol: ({ children }) => (
+                <ol className="list-decimal ml-8 space-y-4 text-[#9c9c9c] font-[500] py-2 text-lg xl:text-xl ">
+                    {children}
+                </ol>
+            ),
             li: ({ children }) => <li className="">{children}</li>,
             strong: ({ children }) => (
-                <strong className="text-[#fafafa] font-semibold text-lg md:text-xl xl:text-xl ">
+                <strong className="text-[#fafafa] font-bold text-lg md:text-xl xl:text-xl ">
                     {children}
                 </strong>
             ),
@@ -335,38 +340,103 @@ export default function CaseStudyDetails() {
                                     {/* 🔥 RESULTS LAYOUT */}
                                     {isResults ? (
                                         <>
-                                            <div className="w-full flex flex-col gap-4 lg:gap-0 lg:flex-row items-stretch justify-center py-4">
-                                                <div className="relative  w-full lg:w-[35%]">
-                                                    <MarkdownRenderer>
-                                                        {section.beforeDescription}
-                                                    </MarkdownRenderer>
-                                                </div>
-                                                <div className="relative w-full lg:w-[65%] h-[200px] lg:h-auto">
-                                                    <Image
-                                                        src={`${process.env.NEXT_PUBLIC_API_URL}${beforeImg}`}
-                                                        alt="Reach out"
-                                                        fill
-                                                        sizes="(max-width: 1024px) 100vw, 50vw"
-                                                        className="object-contain"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="w-full flex flex-col gap-4 lg:gap-0 lg:flex-row items-stretch justify-center py-4">
-                                                <div className="relative  w-full lg:w-[35%]">
-                                                    <MarkdownRenderer>
-                                                        {section.afterDescription}
-                                                    </MarkdownRenderer>
-                                                </div>
-                                                <div className="relative w-full lg:w-[65%] h-[200px] lg:h-auto border">
-                                                    <Image
-                                                        src={`${process.env.NEXT_PUBLIC_API_URL}${afterImg}`}
-                                                        alt="Reach out"
-                                                        fill
-                                                        sizes="(max-width: 1024px) 100vw, 50vw"
-                                                        className="object-contain"
-                                                    />
-                                                </div>
-                                            </div>
+                                            {/* BEFORE */}
+                                            {(() => {
+                                                const hasImg = Boolean(section.beforeImage?.url);
+                                                const hasText = Boolean(
+                                                    section.beforeDescription?.trim()
+                                                );
+
+                                                return (
+                                                    <div className="w-full flex flex-col lg:flex-row gap-4 py-4 items-start">
+                                                        {/* TEXT */}
+                                                        {hasText && (
+                                                            <div
+                                                                className={`relative ${
+                                                                    hasImg
+                                                                        ? 'w-full lg:w-[35%]'
+                                                                        : 'w-full'
+                                                                }`}
+                                                            >
+                                                                <MarkdownRenderer>
+                                                                    {section.beforeDescription}
+                                                                </MarkdownRenderer>
+                                                            </div>
+                                                        )}
+
+                                                        {/* IMAGE */}
+                                                        {hasImg && (
+                                                            <div
+                                                                className={`relative ${
+                                                                    hasText
+                                                                        ? 'w-full lg:w-[65%]'
+                                                                        : 'w-full'
+                                                                }`}
+                                                            >
+                                                                <div className="relative w-full aspect-[16/9] min-h-[220px] bg-gray-100 rounded-2xl overflow-hidden">
+                                                                    <Image
+                                                                        src={`${process.env.NEXT_PUBLIC_API_URL}${section.beforeImage.url}`}
+                                                                        alt="Before result"
+                                                                        fill
+                                                                        sizes="(max-width: 1024px) 100vw, 65vw"
+                                                                        className="object-contain"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })()}
+
+                                            {/* AFTER */}
+                                            {(() => {
+                                                const hasImg = Boolean(section.afterImage?.url);
+                                                const hasText = Boolean(
+                                                    section.afterDescription?.trim()
+                                                );
+
+                                                return (
+                                                    <div className="w-full flex flex-col lg:flex-row gap-4 py-4 items-start">
+                                                        {/* TEXT */}
+                                                        {hasText && (
+                                                            <div
+                                                                className={`relative ${
+                                                                    hasImg
+                                                                        ? 'w-full lg:w-[35%]'
+                                                                        : 'w-full'
+                                                                }`}
+                                                            >
+                                                                <MarkdownRenderer>
+                                                                    {section.afterDescription}
+                                                                </MarkdownRenderer>
+                                                            </div>
+                                                        )}
+
+                                                        {/* IMAGE */}
+                                                        {hasImg && (
+                                                            <div
+                                                                className={`relative ${
+                                                                    hasText
+                                                                        ? 'w-full lg:w-[65%]'
+                                                                        : 'w-full'
+                                                                }`}
+                                                            >
+                                                                <div className="relative w-full aspect-[16/9] min-h-[220px] bg-gray-100 rounded-2xl overflow-hidden">
+                                                                    <Image
+                                                                        src={`${process.env.NEXT_PUBLIC_API_URL}${section.afterImage.url}`}
+                                                                        alt="After result"
+                                                                        fill
+                                                                        sizes="(max-width: 1024px) 100vw, 65vw"
+                                                                        className="object-contain"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+
+                                                    </div>
+                                                );
+                                            })()}
                                         </>
                                     ) : (
                                         <MarkdownRenderer>{section.description}</MarkdownRenderer>
@@ -391,7 +461,9 @@ export default function CaseStudyDetails() {
                 </h2>
 
                 <div className="mt-12 md:mt-14 grid gap-12 md:gap-6 lg:gap-10 md:grid-cols-3 items-stretch">
-                    {caseStudies?.length > 0 && <CaseStudyCards caseStudies={caseStudies} />}
+                    {caseStudies?.length > 0 && (
+                        <CaseStudyCards caseStudies={caseStudies.slice(0, 3)} />
+                    )}
                 </div>
 
                 <div className="w-full flex items-center justify-center mt-12">

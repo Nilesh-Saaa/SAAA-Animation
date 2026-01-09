@@ -37,7 +37,7 @@ export default function ServicePage() {
 
     return (
         <>
-            <ServiceLayout data={data} caseStudies={caseStudies} />
+            <ServiceLayout data={data} caseStudies={caseStudies.slice(0, 3)} />
         </>
     );
 }

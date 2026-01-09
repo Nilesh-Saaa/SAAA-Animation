@@ -49,7 +49,7 @@ const HeroSerivce = memo(function HeroService() {
     const glassConfigs = useMemo(
         () => [
             {
-                modelUrl: '/models/design.glb',
+                modelUrl: '/models/design2.glb',
                 position: `${
                     isMobile
                         ? 'top-[65%] left-[0%]'
@@ -65,7 +65,7 @@ const HeroSerivce = memo(function HeroService() {
                 rotationOffset: 0,
             },
             {
-                modelUrl: '/models/build.glb',
+                modelUrl: '/models/build2.glb',
                 position: `${
                     isMobile
                         ? 'top-[60%] right-[0%]'
@@ -81,7 +81,7 @@ const HeroSerivce = memo(function HeroService() {
                 rotationOffset: 0.5,
             },
             {
-                modelUrl: '/models/grow.glb',
+                modelUrl: '/models/grow2.glb',
                 position: `${
                     isMobile
                         ? 'top-[4%] right-[25%]'

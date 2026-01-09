@@ -59,13 +59,19 @@ const CaseStudyCards = ({ caseStudies = [], className = '' }) => {
                         </div>
 
                         <div className="w-full h-[400px] xl:h-[450px] 3xl:h-[600px] flex  items-center justify-center rounded-b-xl">
-                            <Image
-                                src={`${process.env.NEXT_PUBLIC_API_URL}${item.coverImage.url}`}
-                                alt={item.title || 'case study image'}
-                                width={200}
-                                height={1000}
-                                className="h-full w-full object-cover  rounded-b-2xl"
-                            />
+                            {item?.coverImage?.url ? (
+                                <Image
+                                    src={`${process.env.NEXT_PUBLIC_API_URL}${item.coverImage.url}`}
+                                    alt={item.title || 'case study image'}
+                                    width={200}
+                                    height={1000}
+                                    className="h-full w-full object-cover rounded-b-2xl"
+                                />
+                            ) : (
+                                <div className="h-full w-full rounded-b-2xl bg-gray-200 flex items-center justify-center">
+                                    <span className="text-sm text-gray-500">No Image</span>
+                                </div>
+                            )}
                         </div>
                     </Link>
                 </div>

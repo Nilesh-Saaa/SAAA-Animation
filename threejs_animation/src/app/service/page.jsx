@@ -51,7 +51,7 @@ const cards = [
                 href: '/creative-marketing-collaterals',
             },
         ],
-        modelUrl: '/models/design.glb',
+        modelUrl: '/models/design2.glb',
     },
     {
         title: 'BUILD',
@@ -71,7 +71,7 @@ const cards = [
                 href: '/amc',
             },
         ],
-        modelUrl: '/models/build.glb',
+        modelUrl: '/models/build2.glb',
     },
     {
         title: 'GROW',
@@ -89,7 +89,7 @@ const cards = [
                 href: '/email-whatsapp-marketing',
             },
         ],
-        modelUrl: '/models/grow.glb',
+        modelUrl: '/models/grow2.glb',
     },
 ];
 const Service = () => {
